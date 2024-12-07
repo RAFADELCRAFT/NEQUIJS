@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEQUIJS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Pantalla de Inicio -->
+  <div id="inicio" class="container">
+    <div class="logo">NEQUIJS</div>
+    <div class="input-group">
+      <label for="phone">Número de celular:</label>
+      <input type="tel" id="phone" maxlength="10" placeholder="Escribe tu número de celular">
+    </div>
+    <button class="button" onclick="goToPin()">Siguiente</button>
+  </div>
+
+  <!-- Pantalla del PIN -->
+  <div id="pin" class="container" style="display: none;">
+    <h1>Escribe tu clave</h1>
+    <div class="pin-inputs">
+      <input type="password" maxlength="1" id="pin1" oninput="moveToNext('pin1', 'pin2')">
+      <input type="password" maxlength="1" id="pin2" oninput="moveToNext('pin2', 'pin3')">
+      <input type="password" maxlength="1" id="pin3" oninput="moveToNext('pin3', 'pin4')">
+      <input type="password" maxlength="1" id="pin4" oninput="finishPin()">
+    </div>
+    <p class="pin-instruction">No dudamos que seas tú...<br>Pero es mejor confirmar ;)</p>
+    <div class="number-pad">
+      <button onclick="enterNumber(1)">1</button>
+      <button onclick="enterNumber(2)">2</button>
+      <button onclick="enterNumber(3)">3</button>
+      <button onclick="enterNumber(4)">4</button>
+      <button onclick="enterNumber(5)">5</button>
+      <button onclick="enterNumber(6)">6</button>
+      <button onclick="enterNumber(7)">7</button>
+      <button onclick="enterNumber(8)">8</button>
+      <button onclick="enterNumber(9)">9</button>
+      <button onclick="enterNumber(0)">0</button>
+      <button onclick="deleteNumber()">&#x232b;</button>
+    </div>
+    <p class="forgot-pin">¿Se te olvidó?</p>
+  </div>
+
+  <!-- Mensaje de confirmación -->
+  <div id="confirmation" class="container" style="display: none;">
+    <h1>¡Cuenta activada!</h1>
+    <p>Activa tu cuenta con <strong>José Master</strong></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

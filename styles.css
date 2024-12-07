@@ -1,0 +1,123 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #1c001e;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#inicio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group input {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.button {
+  width: 80%;
+  padding: 10px;
+  background-color: #ff0a72;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Estilos del PIN */
+#pin .pin-inputs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#pin .pin-inputs input {
+  width: 50px;
+  height: 50px;
+  margin: 0 5px;
+  font-size: 2rem;
+  text-align: center;
+  border: 2px solid white;
+  background-color: transparent;
+  border-radius: 5px;
+  color: white;
+}
+
+#pin .pin-instruction {
+  font-size: 1rem;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+#pin .number-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+#pin .number-pad button {
+  background-color: transparent;
+  color: white;
+  font-size: 1.5rem;
+  padding: 15px;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#pin .number-pad button:hover {
+  background-color: #ff0a72;
+}
+
+#pin .forgot-pin {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  color: #ccc;
+  cursor: pointer;
+}
+
+/* Confirmación de cuenta */
+#confirmation h1 {
+  font-size: 2.5rem;
+  color: #ff0a72;
+  margin-bottom: 20px;
+}
+
+#confirmation p {
+  font-size: 1.5rem;
+  color: #ccc;
+}
